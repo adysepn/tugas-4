@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tokokita/model/produk.dart';
 import 'package:tokokita/ui/produk_form.dart';
+import 'package:tokokita/ui/produk_page.dart';
+import 'package:tokokita/bloc/produk_bloc.dart';
 
 class ProdukDetail extends StatefulWidget {
   Produk? produk;
@@ -68,7 +70,11 @@ class _ProdukDetailState extends State<ProdukDetail> {
 //tombol hapus
         OutlinedButton(
           child: const Text("Ya"),
-          onPressed: () {},
+          onPressed: () {
+            ProdukBloc.deleteProduk(id: widget.produk!.id);
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ProdukPage()));
+          },
         ),
 //tombol batal
         OutlinedButton(
@@ -77,7 +83,6 @@ class _ProdukDetailState extends State<ProdukDetail> {
         )
       ],
     );
-
     showDialog(builder: (context) => alertDialog, context: context);
   }
 }
